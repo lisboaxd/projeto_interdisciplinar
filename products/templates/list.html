@@ -8,6 +8,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="table-responsive table--no-card m-b-30">
+            {% if products %}
             <table class="table table-borderless table-striped table-earning">
                 <thead>
                     <tr>
@@ -18,10 +19,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for product in products %}
                     <tr>
-                        <td>2018-09-29 05:57</td>
-                        <td>100398</td>
-                        <td>iPhone X 64Gb Grey</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>{{ product.type_id }}</td>                        
                         <td>
                             <a href="">
                                 <i class="zmdi zmdi-account"></i>
@@ -34,8 +36,12 @@
                             </a>
                         </td>
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
+            {% else %}
+            <p>Nothing to see here</p>
+            {% endif %}
         </div>
     </div>                    
 </div>
