@@ -1,8 +1,9 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from products.views import ListProductView, CreateProductView
 
+app_name = "products"
+
 urlpatterns = [
-    path('', ListProductView),
-    path('create', CreateProductView.as_view()),
+    path('', ListProductView, name='list'),
+    path('create', CreateProductView.as_view(), name='create'),
 ]

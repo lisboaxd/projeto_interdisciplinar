@@ -1,11 +1,12 @@
-from django.shortcuts import render
+from django.contrib.auth.views import LoginView
 from django.views.generic import TemplateView, ListView
-# Create your views here.
+from django.shortcuts import render
+# from django.urls import reverse
 
 
-class LoginView(TemplateView):
-    template_name = "login.html"
+class CustomLoginView(LoginView):
+    template_name = "registration/login.html"    
 
 
 class RegisterView(TemplateView):
-    template_name = "register.html"
+    template_name = "registration/register.html"
