@@ -14,7 +14,7 @@ Create a virtualenv to start the settings. Install if you don't have using the f
 
 Create the local virtualenv: `python3 -m venv venv`
 
-Activate the virtualenv: `source env/bin/activate`
+Activate the virtualenv: `source venv/bin/activate`
 
 ### Installation
 

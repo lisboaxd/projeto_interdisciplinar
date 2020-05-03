@@ -1,4 +1,5 @@
 {% extends "layouts/public.html" %}
+{% load static i18n %}
 
 {% block title %}
  Login
@@ -10,7 +11,7 @@
   <div class="login-content">
     <div class="login-logo">
       <a href="#">
-        <img title="images/icon/logo.png" alt="CoolAdmin" />
+        <img src="{% static 'images/recicla-mais-brand.png' %}" width="300px" alt="Recicla+ App" />
       </a>
     </div>
     <div class="login-form">
