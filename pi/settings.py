@@ -25,7 +25,7 @@ SECRET_KEY = 'ls=_o7ckk+m1t#hle#4*&w2sfnvdnj01_c636!jd5y0&!$*n++'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products',
-    'core'
+    'core',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -125,4 +126,5 @@ STATICFILES_DIRS = [
 STATIC_URL = '/static/'
 
 
+LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/products/'

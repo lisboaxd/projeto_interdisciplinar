@@ -35,13 +35,13 @@
                 </div>
                 <div class="account-dropdown__body">
                   <div class="account-dropdown__item">
-                    <a href="/profile">
+                    <a href="{% url 'core:profile' %}">
                       <i class="zmdi zmdi-account"></i>Conta</a
                     >
                   </div>
                 </div>
                 <div class="account-dropdown__footer">
-                  <a href="/logout"> <i class="zmdi zmdi-power"></i>Sair</a>
+                  <a href="{% url 'core:logout' %}"> <i class="zmdi zmdi-power"></i>Sair</a>
                 </div>
               </div>
             </div>

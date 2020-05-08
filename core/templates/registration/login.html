@@ -15,6 +15,11 @@
       </a>
     </div>
     <div class="login-form">
+      {% for field, errors in form.errors.items %}
+          {% for error in errors %}
+            {{ error }}
+          {% endfor %}
+      {% endfor %}
       <form action="" method="post">
       {% csrf_token %}
         <div class="form-group">
