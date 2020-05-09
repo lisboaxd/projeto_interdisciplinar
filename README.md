@@ -1,6 +1,6 @@
 <p align="center">
   <a href="#">
-    <img src="#" width="200px" alt="#">
+    <img src="https://raw.githubusercontent.com/lisboaxd/projeto_interdisciplinar/master/static/images/recicla-mais-brand.png" width="200px" alt="Recicla+ App">
   </a>
 
   <h3 align="center">Projeto interdisciplinar</h3>
