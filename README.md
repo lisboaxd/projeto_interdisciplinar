@@ -32,6 +32,12 @@ Use the `pip install` to install from `requirements.txt` file.
 pip install -r requirements.txt
 ```
 
+Run all database migrations:
+
+```python
+python manage.py migrate
+```
+
 Use the `manage.py` file to run the server.
 
 ```python
