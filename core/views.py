@@ -12,7 +12,6 @@ class CustomLoginView(LoginView):
 
 
 def register(request):
-    import ipdb; ipdb.set_trace()
     registered = False
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
