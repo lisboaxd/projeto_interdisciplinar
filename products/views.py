@@ -13,3 +13,9 @@ def list_product_view(request):
 
 class CreateProductView(LoginRequiredMixin, TemplateView):
     template_name = "create.html"
+
+class AvaliateProductView(LoginRequiredMixin, TemplateView):
+    template_name = "avaliate-product.html"
+
+class ShowCouponView(TemplateView):
+    template_name = "coupon.html"

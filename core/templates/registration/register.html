@@ -2,7 +2,7 @@
 {% load static i18n %}
 
 {% block title %}
- Register
+Register
 {% endblock title %}
 
 
@@ -16,63 +16,62 @@
         </div>
         <div class="login-form">
             {% if registered %}
-                <h3 style="text-align: center;">Obrigado por se registrar!</h3>
+            <h3 style="text-align: center;">Obrigado por se registrar!</h3>
             {% else %}
-                {% if user_form.errors %}
-                    {% for field, error in user_form.errors.items %}
-                        {% for error in errors %}
-                            {{ error }}
-                        {% endfor %}
-                    {% endfor %}
-                {% endif %}
-                <form action="" method="post">
-                    {% csrf_token %}
-                   
-                    <div class="card">
-                        <div class="card-header">
-                            <strong>Acesso</strong>
+            {% if user_form.errors %}
+            {% for field, error in user_form.errors.items %}
+            {% for error in errors %}
+            {{ error }}
+            {% endfor %}
+            {% endfor %}
+            {% endif %}
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Pessoal</strong>
+                    </div>
+                    <div class="card-body card-block">
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <input class="au-input au-input--full" type="text" name="nome" placeholder="Nome">
                         </div>
-                        <div class="card-body card-block">
-                            <div class="form-group">
-                                <label>Usuario</label>
-                                <input class="au-input au-input--full" type="text" name="username" placeholder="Nome">
-                            </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <label>Senha</label>
-                                <input class="au-input au-input--full" type="password" name="password" placeholder="Senha">
-                            </div>
+                        <div class="form-group">
+                            <label>Tipo</label>
+                            <select name="tipo" id="select" class="form-control">
+                                <option value="0">Doador</option>
+                                <option value="1">Empresa</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="endereco" class=" form-control-label">Endereço</label>
+                            <input type="text" id="endereco" placeholder="Rua/Av. Número, Bairro, Cidade, Estado"
+                                class="form-control">
                         </div>
                     </div>
+                </div>
 
-                    {% comment %} <div class="card">
-                        <div class="card-header">
-                                <strong>Pessoal</strong>
-                            </div>
-                            <div class="card-body card-block">
-                            <div class="form-group">
-                                    <label>Nome</label>
-                                    <input class="au-input au-input--full" type="text" name="nome" placeholder="Nome">
-                                </div>
-                                <div class="form-group">
-                                    <label>Tipo</label>
-                                    <select name="tipo" id="select" class="form-control">
-                                        <option value="0">Doador</option>
-                                        <option value="1">Empresa</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="endereco" class=" form-control-label">Endereço</label>
-                                    <input type="text" id="endereco" placeholder="Rua/Av. Número, Bairro, Cidade, Estado" class="form-control">
-                                </div>
-                            </div>
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Acesso</strong>
+                    </div>
+                    <div class="card-body card-block">
+                        <div class="form-group">
+                            <label>Usuario</label>
+                            <input class="au-input au-input--full" type="text" name="username" placeholder="Nome">
                         </div>
-                    {% endcomment %}
-                    <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Registrar</button>
-                </form>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label>Senha</label>
+                            <input class="au-input au-input--full" type="password" name="password" placeholder="Senha">
+                        </div>
+                    </div>
+                </div>
+                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Registrar</button>
+            </form>
             {% endif %}
             <div class="register-link">
                 <p>
