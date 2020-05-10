@@ -1,4 +1,5 @@
 {% extends "layouts/base.html" %}
+{% load static i18n %}
 
 {% block title %}
  Products
@@ -52,7 +53,12 @@
                 </tbody>
             </table>
             {% else %}
-            <p>Nothing to see here</p>
+            <div class="spacer-box-20"></div>
+            <div class="empty-box">
+                <img src="{% static 'images/icon/green-earth.svg' %}" width="150px" alt="Recicla+ App" draggable="false" />
+                <h3>Não há registros</h3>
+                <p>Não encontramos nada para ser mostrado aqui.</p>
+            </div>  
             {% endif %}
         </div>
     </div>                    
