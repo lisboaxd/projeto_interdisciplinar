@@ -20,6 +20,7 @@ def register(request):
             user = user_form.save()
             user.set_password(user.password)
             user.save()
+            registered = True
         if profile_form.is_valid():
             profile = profile_form.save(commit=False)
             profile.user = user
