@@ -1,0 +1,15 @@
+
+{% extends "layouts/base.html" %}
+
+{% block title %}
+Deletar Produtos
+{% endblock title %}
+
+{% block content %}
+<div class="col-lg-12">
+    <form action="" method="post">{% csrf_token %}
+        <h3>Certeza que deseja excluir "{{ object }}"?</h3>
+        <input type="submit" value="Confirmar" />
+    </form>
+</div>
+{% endblock content %}

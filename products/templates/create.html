@@ -1,4 +1,5 @@
 {% extends "layouts/base.html" %}
+{% load crispy_forms_tags %}
 
 {% block title %}
  Criar Produtos
@@ -12,33 +13,17 @@
             {% comment %} <small> Create</small> {% endcomment %}
         </div>
         <div class="card-body card-block">
-            <div class="form-group">
-                <label for="name" class=" form-control-label">Nome</label>
-                <input type="text" id="name" placeholder="Nome" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="quantity" class=" form-control-label">Quantidade</label>
-                <input type="number" id="quantity" placeholder="quantidade" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="image" class=" form-control-label">Imagem</label>
-                <input type="file" id="image" placeholder="imagem" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="type" class=" form-control-label">Tipo</label>
-                <select class="form-control" name="type" id="type">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-            </div>            
-            <div class="row form-group">
-                <div class="col-12">
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success">Salvar</button>
-                    </div>
-                </div>                
-            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | crispy }}            
+                <div class="row form-group">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">Salvar</button>
+                        </div>
+                    </div>                
+                </div>
+            </form>
         </div>
     </div>
 </div>
