@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView, FormView, CreateView, DeleteView
 from django.urls import reverse, reverse_lazy
 
-from .models import Product, Company
+from .models import Product, Company, Coupon
 from .forms import ProductForm
 from core.models import UserProfileInfo
 
@@ -13,6 +13,11 @@ from core.models import UserProfileInfo
 def list_product_view(request):
     products = Product.objects.all()
     return render(request, 'list.html', {'products': products})
+
+@login_required
+def list_coupon_view(request):
+    coupons = Coupon.objects.all()
+    return render(request, 'coupon.html', {'coupons': coupons})
 
 
 class CreateProductView(LoginRequiredMixin, CreateView):

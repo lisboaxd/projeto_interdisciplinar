@@ -7,10 +7,10 @@ class Donor(models.Model):
     user = models.OneToOneField(UserProfileInfo, on_delete=models.CASCADE)
     created_at = models.DateField('Criado em', auto_now_add=True)
 
-    def __str__(self):
-        return f"{self.user}"
 
-
+class Company(models.Model):
+    user = models.ForeignKey(UserProfileInfo, on_delete=models.CASCADE)
+    created_at = models.DateField('Criado em', auto_now_add=True)
 
 class CompanyAssociate(models.Model):
     name = models.CharField('Nome', max_length=255, null=True, blank=True)
@@ -54,7 +54,7 @@ class Product(models.Model):
     name = models.CharField('Nome', max_length=255, null=True, blank=True)
     type = models.ForeignKey(TypeProduct, on_delete=models.SET_NULL, null=True, blank=True)
     quantity = models.PositiveIntegerField('Quantidade', null=False, blank=False)
-    image = models.ImageField('Imagem', upload_to="media")
+    image = models.ImageField('Imagem', upload_to='product_image')
     created_at = models.DateField('Data de criação', auto_now_add=True)
     status = models.CharField('Status', default='waiting', max_length=50, choices=STATE_CHOICES, null=False, blank=False)
 
