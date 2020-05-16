@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Product
+from .models import Product, Donor, Company
 
 class ProductForm(ModelForm):
 
@@ -12,3 +12,16 @@ class ProductForm(ModelForm):
             'quantity': 'Quantidade',
             'image': 'Imagem',
         }
+
+
+class DonorForm(ModelForm):
+
+    class Meta:
+        model = Donor
+        fields = ('user',)
+
+class CompanyForm(ModelForm):
+
+    class Meta:
+        model = Company
+        fields = ('user',)

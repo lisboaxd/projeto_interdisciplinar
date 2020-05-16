@@ -4,19 +4,13 @@ from core.models import UserProfileInfo
 import uuid
 
 class Donor(models.Model):
-    user = models.ForeignKey(UserProfileInfo, on_delete=models.CASCADE)
+    user = models.OneToOneField(UserProfileInfo, on_delete=models.CASCADE)
     created_at = models.DateField('Criado em', auto_now_add=True)
 
     def __str__(self):
         return f"{self.user}"
 
 
-class Company(models.Model):
-    user = models.ForeignKey(UserProfileInfo, on_delete=models.CASCADE)
-    created_at = models.DateField('Criado em', auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.user}"
 
 class CompanyAssociate(models.Model):
     name = models.CharField('Nome', max_length=255, null=True, blank=True)
@@ -66,7 +60,7 @@ class Product(models.Model):
 
 
 
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='empresa')
+    # company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='empresa')
     donor = models.ForeignKey(Donor, on_delete=models.CASCADE, related_name='doador')
 
     class Meta:
@@ -76,3 +70,12 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Company(models.Model):
+    user = models.OneToOneField(UserProfileInfo, on_delete=models.CASCADE)
+    created_at = models.DateField('Criado em', auto_now_add=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True )
+
+    def __str__(self):
+        return f"{self.user}"

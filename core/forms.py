@@ -15,5 +15,6 @@ class UserProfileInfoForm(forms.ModelForm):
     name = forms.CharField(label='Nome',label_suffix='SUFIXO', max_length=255, min_length=3, strip=True, required=True)
     class Meta():
         model = UserProfileInfo
-        fields = ('profile_pic',)
+        fields = ('profile_pic', 'user',)
+        widgets = {'user': forms.HiddenInput()}
     

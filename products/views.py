@@ -21,13 +21,11 @@ class CreateProductView(LoginRequiredMixin, CreateView):
     success_url = '/products/'
 
     def post(self, request, *args, **kw):
-        company, _ = Company.objects.get_or_create(user=self.request.user.userprofileinfo)
-        company.save()
-        form = ProductForm(request.POST, files=request.FILES)
-        if form.is_valid():            
+        form = self.form_class(request.POST, files=request.FILES)
+        if form.is_valid():
+            # TODO: validar se usuário é do tipo donor, se não for, retornar mensagem de erro
             prod = form.save(commit=False)
-            prod.company = company
-            prod.donor = self.request.user.userprofileinfo.donor_set.first()
+            prod.donor = self.request.user.userprofileinfo.donor
             prod.save()
             return self.form_valid(form)
 

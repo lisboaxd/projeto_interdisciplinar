@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 
 from .forms import UserForm, UserProfileInfoForm
+from products.forms import DonorForm, CompanyForm
 
 
 class CustomLoginView(LoginView):
@@ -15,19 +16,26 @@ def register(request):
     registered = False
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
-        profile_form = UserProfileInfoForm(data=request.POST)
         if user_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
             user.save()
-            registered = True
+            dados = request.POST.copy()
+            dados['user'] = user
+            profile_form = UserProfileInfoForm(data=dados)
         if profile_form.is_valid():
-            profile = profile_form.save(commit=False)
-            profile.user = user
+            profile = profile_form.save()
+            type_user = ''
             if 'profile_pic' in request.FILES:
                 profile.profile_pic = request.FILES['profile_pic']
-            profile.save()
-            registered = True
+            if request.POST.get('tipo') == '0':
+                type_user = DonorForm(data={'user':profile})
+            else:
+                type_user = CompanyForm(data={'user':profile})
+            if type_user.is_valid():
+                type_user.save()
+                profile.save()
+                registered = True
 
     else:
         user_form = UserForm()
