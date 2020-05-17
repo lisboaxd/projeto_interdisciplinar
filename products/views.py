@@ -42,5 +42,5 @@ class DeleteProductView(LoginRequiredMixin, DeleteView):
 class AvaliateProductView(LoginRequiredMixin, TemplateView):
     template_name = "avaliate-product.html"
 
-class ShowCouponView(TemplateView):
+class ShowCouponView(LoginRequiredMixin, TemplateView):
     template_name = "coupon.html"

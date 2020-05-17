@@ -1,0 +1,61 @@
+{% extends "layouts/base.html" %}
+{% load static i18n %}
+
+{% block title %}
+ Products
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="overview-wrap">
+            <h2 class="title-1">Avaliar Produtos</h2>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="table-responsive table--no-card m-b-30">
+            {% if coupons %}
+            <!-- <table class="table table-borderless table-striped table-earning">
+                <thead>
+                    <tr>
+                        <th>date</th>
+                        <th>order ID</th>
+                        <th>name</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>{{ product.type_id }}</td>                        
+                        <td class="d-flex justify-content-between">
+                            <a href="#">
+                                <i class="zmdi zmdi-eye"></i> View
+                            </a>
+                            <a href="#">
+                                <i class="zmdi zmdi-edit"></i> Edit
+                            </a>
+                            <a href="{% url 'products:delete' product.pk %}">
+                                <i class="zmdi zmdi-delete"></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table> -->
+            {% else %}
+            <div class="spacer-box-20"></div>
+            <div class="empty-box">
+                <img src="{% static 'images/icon/green-earth.svg' %}" width="150px" alt="Recicla+ App" draggable="false" />
+                <h3>Não há registros</h3>
+                <p>Não encontramos nada para ser mostrado aqui.</p>
+            </div>  
+            {% endif %}
+        </div>
+    </div>                    
+</div>
+{% endblock content %}
