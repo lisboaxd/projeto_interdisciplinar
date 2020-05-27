@@ -38,6 +38,7 @@ class UpdateProductView(LoginRequiredMixin, edit.UpdateView):
     template_name = "create.html"
     model = Product
     form_class = ProductForm
+    success_url = '/products/'
     # fields = ['name',]
 
 
