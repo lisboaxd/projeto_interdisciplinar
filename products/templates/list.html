@@ -38,14 +38,14 @@
                         <td>{{ product.quantity }}</td>
                         <td>{{ product.type_id }}</td>                        
                         <td class="d-flex justify-content-between">
-                            <a href="#">
-                                <i class="zmdi zmdi-eye"></i> View
+                            <a href="#" title='Visualizar'>
+                                <i class="zmdi zmdi-eye"></i>
                             </a>
-                            <a href="#">
-                                <i class="zmdi zmdi-edit"></i> Edit
+                            <a href="{% url 'products:edit' product.pk %}" title='Editar'>
+                                <i class="zmdi zmdi-edit"></i>
                             </a>
-                            <a href="{% url 'products:delete' product.pk %}">
-                                <i class="zmdi zmdi-delete"></i> Delete
+                            <a href="{% url 'products:delete' product.pk %}" title='Deletar'>
+                                <i class="zmdi zmdi-delete"></i>
                             </a>
                         </td>
                     </tr>

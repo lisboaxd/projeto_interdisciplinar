@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, ListView, FormView, CreateView, DeleteView
+from django.views.generic import TemplateView, ListView, FormView, CreateView, DeleteView, edit
 from django.urls import reverse, reverse_lazy
 
 from .models import Product, Company, Coupon
@@ -33,6 +33,13 @@ class CreateProductView(LoginRequiredMixin, CreateView):
             prod.donor = self.request.user.userprofileinfo.donor
             prod.save()
             return self.form_valid(form)
+
+class UpdateProductView(LoginRequiredMixin, edit.UpdateView):
+    template_name = "create.html"
+    model = Product
+    form_class = ProductForm
+    # fields = ['name',]
+
 
 
 class DeleteProductView(LoginRequiredMixin, DeleteView):
