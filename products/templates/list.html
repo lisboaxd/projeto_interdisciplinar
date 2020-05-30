@@ -10,11 +10,13 @@
     <div class="col-md-12">
         <div class="overview-wrap">
             <h2 class="title-1">Produtos</h2>
+            {% if donor %}
             <a href="{% url 'products:create' %}">
                 <button class="au-btn au-btn-icon au-btn--blue">
                     <i class="zmdi zmdi-plus"></i>Add Produto
                 </button>
             </a>
+            {% endif %}
         </div>
     </div>
 </div>
@@ -25,10 +27,11 @@
             <table class="table table-borderless table-striped table-earning">
                 <thead>
                     <tr>
-                        <th>date</th>
-                        <th>order ID</th>
-                        <th>name</th>
-                        <th>actions</th>
+                        <th>Nome</th>
+                        <th>Quantidade</th>
+                        <th>Tipo</th>
+                        <th>Status</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,18 +39,26 @@
                     <tr>
                         <td>{{ product.name }}</td>
                         <td>{{ product.quantity }}</td>
-                        <td>{{ product.type_id }}</td>                        
+                        <td>{{ product.type.name | title}}</td>
+                        <td>{{ product.get_status_display | title}}</td>
+                        
                         <td class="d-flex justify-content-between">
-                            <a href="#" title='Visualizar'>
-                                <i class="zmdi zmdi-eye"></i>
-                            </a>
+                        {% if donor %}
                             <a href="{% url 'products:edit' product.pk %}" title='Editar'>
                                 <i class="zmdi zmdi-edit"></i>
                             </a>
                             <a href="{% url 'products:delete' product.pk %}" title='Deletar'>
                                 <i class="zmdi zmdi-delete"></i>
                             </a>
+                        {% else %}
+                            {% if not product.status == 'approved' %}
+                                <a href="{% url 'products:aprove' product.pk %}" title='Aprovar'>
+                                    <i class="fa  fa-check"></i>
+                                </a>
+                            {% endif %}
+                        {% endif %}
                         </td>
+                            
                     </tr>
                     {% endfor %}
                 </tbody>

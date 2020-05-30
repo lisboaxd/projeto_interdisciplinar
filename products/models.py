@@ -9,7 +9,7 @@ class Donor(models.Model):
 
 
 class Company(models.Model):
-    user = models.ForeignKey(UserProfileInfo, on_delete=models.CASCADE)
+    user = models.OneToOneField(UserProfileInfo, on_delete=models.CASCADE)
     created_at = models.DateField('Criado em', auto_now_add=True)
 
 class CompanyAssociate(models.Model):
@@ -58,10 +58,8 @@ class Product(models.Model):
     created_at = models.DateField('Data de criação', auto_now_add=True)
     status = models.CharField('Status', default='waiting', max_length=50, choices=STATE_CHOICES, null=False, blank=False)
 
-
-
-    # company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='empresa')
-    donor = models.ForeignKey(Donor, on_delete=models.CASCADE, related_name='doador')
+    donor = models.ForeignKey(Donor, on_delete=models.CASCADE, related_name='products')
+    company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True, blank=True )
 
     class Meta:
         verbose_name = 'Produto'
@@ -72,10 +70,10 @@ class Product(models.Model):
         return self.name
 
 
-class Company(models.Model):
-    user = models.OneToOneField(UserProfileInfo, on_delete=models.CASCADE)
-    created_at = models.DateField('Criado em', auto_now_add=True)
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True )
+# class Company(models.Model):
+#     user = models.OneToOneField(UserProfileInfo, on_delete=models.CASCADE)
+#     created_at = models.DateField('Criado em', auto_now_add=True)
+#     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True )
 
-    def __str__(self):
-        return f"{self.user}"
+#     def __str__(self):
+#         return f"{self.user}"
