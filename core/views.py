@@ -1,10 +1,11 @@
 from django.contrib.auth.views import LoginView
-from django.views.generic import TemplateView, ListView, FormView
+from django.views.generic import TemplateView, ListView, FormView, edit
 from django.shortcuts import render
 
 
 from .forms import UserForm, UserProfileInfoForm
 from products.forms import DonorForm, CompanyForm
+from .models import UserProfileInfo
 
 
 class CustomLoginView(LoginView):
@@ -47,4 +48,6 @@ def register(request):
 
 class ProfileView(FormView):
     template_name = 'profile/form.html'
+    model=UserProfileInfo
     form_class = UserProfileInfoForm
+    success_url = '/profile/'       
