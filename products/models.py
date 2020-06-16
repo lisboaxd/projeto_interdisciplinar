@@ -7,10 +7,16 @@ class Donor(models.Model):
     user = models.OneToOneField(UserProfileInfo, on_delete=models.CASCADE)
     created_at = models.DateField('Criado em', auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.user.username}"
+
 
 class Company(models.Model):
     user = models.OneToOneField(UserProfileInfo, on_delete=models.CASCADE)
     created_at = models.DateField('Criado em', auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username}"
 
 class CompanyAssociate(models.Model):
     name = models.CharField('Nome', max_length=255, null=True, blank=True)
@@ -25,6 +31,7 @@ class Coupon(models.Model):
     is_used = models.BooleanField('Cupon Usado', default=False, blank=False, null=False)
     created_at = models.DateField('Criado em', auto_now_add=True)
     donor = models.ForeignKey(UserProfileInfo, on_delete=models.CASCADE, related_name='doador')
+    hash = models.UUIDField('hash', default=uuid.uuid4, editable=False, unique=True)
 
 class TypeProduct(models.Model):
     ACTIVE_CHOICES = (

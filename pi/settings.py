@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'core',
     'crispy_forms',
     'widget_tweaks',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,14 @@ STATIC_URL = '/static/'
 
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/products/'
+
+AUTH_USER_MODEL =  'core.UserProfileInfo'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

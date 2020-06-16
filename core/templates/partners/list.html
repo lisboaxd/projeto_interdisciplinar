@@ -1,0 +1,77 @@
+{% extends "layouts/base.html" %}
+{% load static i18n %}
+
+{% block title %}
+ Products
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="overview-wrap">
+            <h2 class="title-1">Empresas Parceiras</h2>
+            {% if donor %}
+            <a href="{% url 'products:create' %}">
+                <button class="au-btn au-btn-icon au-btn--blue">
+                    <i class="zmdi zmdi-plus"></i>Add Produto
+                </button>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="table-responsive table--no-card m-b-30">
+            {% if object_list %}
+            <table class="table table-borderless table-striped table-earning">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        {% comment %} <th>Quantidade</th>
+                        <th>Tipo</th>
+                        <th>Status</th>
+                        <th>Ações</th> {% endcomment %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for object in object_list %}
+                    <tr>
+                        <td>{{ object.name }}</td>
+                        {% comment %} <td>{{ object.quantity }}</td>
+                        <td>{{ object.type.name | title}}</td>
+                        <td>{{ object.get_status_display | title}}</td> {% endcomment %}
+                        {% comment %}
+                        <td class="d-flex justify-content-between">
+                         {% if donor %}
+                            <a href="{% url 'products:edit' product.pk %}" title='Editar'>
+                                <i class="zmdi zmdi-edit"></i>
+                            </a>
+                            <a href="{% url 'products:delete' product.pk %}" title='Deletar'>
+                                <i class="zmdi zmdi-delete"></i>
+                            </a>
+                        {% else %}
+                            {% if not product.status == 'approved' %}
+                                <a href="{% url 'products:aprove' product.pk %}" title='Aprovar'>
+                                    <i class="fa  fa-check"></i>
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                        </td>
+                             {% endcomment %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="spacer-box-20"></div>
+            <div class="empty-box">
+                <img src="{% static 'images/icon/green-earth.svg' %}" width="150px" alt="Recicla+ App" draggable="false" />
+                <h3>Não há registros</h3>
+                <p>Não encontramos nada para ser mostrado aqui.</p>
+            </div>  
+            {% endif %}
+        </div>
+    </div>                    
+</div>
+{% endblock content %}

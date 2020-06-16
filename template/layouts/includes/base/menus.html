@@ -1,32 +1,32 @@
 <li>
     <a href="{% url 'products:list' %}">
-        <i class="fas fa-chart-bar"></i>Meus Produtos</a>
+        <i class="fa fa-rocket"></i>Meus Produtos</a>
 </li>
 
-{% if request.user.userprofileinfo.donor %}
+{% if request.user.donor %}
     <li>
         <a href="{% url 'products:coupon' %}">
-            <i class="far fa-check-square"></i>Cupons</a>
+            <i class="fa fa-tag"></i>Cupons</a>
     </li>
     <li>
         <a href="{% url 'products:coupon' %}">
-            <i class="far fa-check-square"></i>Empresas Cadastradas</a>
+            <i class="fa fa-asterisk"></i>Empresas Parceiras</a>
     </li>
 {% endif %}
 
-{% if request.user.userprofileinfo.company %}
+{% if request.user.company %}
     <li>
         <a href="{% url 'products:avaliate' %}">
             <i class="far fa-check-square"></i>Produtos disponíveis</a>
     </li>
     <li>
         <a href="{% url 'core:donors_list' %}">
-            <i class="far fa-check-square"></i>Lista de Doadores</a>
+            <i class="fa fa-list-alt"></i>Lista de Doadores</a>
     </li>
-    <li>
+    {% comment %} <li>
         <a href="#">
-            <i class="far fa-check-square"></i>Relatórios</a>
-    </li>  
+            <i class="far fa-bar-chart-o"></i>Relatórios</a>
+    </li>   {% endcomment %}
 {% endif %}
     
 

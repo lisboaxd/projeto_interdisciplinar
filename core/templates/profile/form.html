@@ -12,20 +12,32 @@
             {% comment %} <small> Create</small> {% endcomment %}
         </div>
 
-        {% for field, errors in form.errors.items %}
-            {% for error in errors %}
-                {{ error }}
-            {% endfor %}
-        {% endfor %}
 
         <div class="card-body card-block">
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    {{ field }} : {{ error }}
+                {% endfor %}
+            {% endfor %}
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <div class="row form-group">
                     <div class="col-12">
                         <label for="form.user.id">Nome</label>
-                        {% render_field form.user type="text" class="form-control"%}
+                        {% render_field form.first_name type="text" class="form-control"%}
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-12">
+                        <label for="form.user.id">Usuário</label>
+                        {% render_field form.username type="text" class="form-control" %}
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-12">
+                        <label for="form.user.id">Senha</label>
+                        {% render_field form.password type="password" class="form-control" %}
                     </div>
                 </div>
 
@@ -33,14 +45,14 @@
                     <div class="col-12">
                         
                         <label for="form.user.id">E-mail</label>
-                        {% render_field form.user type="email" class="form-control" disabled="disabled" %}
+                        {% render_field form.email type="email" class="form-control"%}
                     </div>
                 </div>
 
                 <div class="row form-group">
                     <div class="col-12">
                         <label for="form.user.id">Foto</label>
-                        {% render_field form.user type="file" class="form-control" %}
+                        {% render_field form.profile_pic type="file" class+="form-control" %}
                     </div>
                 </div>                
 

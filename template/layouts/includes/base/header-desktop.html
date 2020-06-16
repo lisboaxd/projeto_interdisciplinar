@@ -13,7 +13,8 @@
             <div class="account-item clearfix js-item-menu">
               <div class="image">
                 {% comment %} <img src="{% static 'images/icon/profile-avatar.svg' %}" alt="John Doe" /> {% endcomment %}
-                <img src="http://www.oogazone.com/wp-content/uploads/2018/11/best-hd-flat-business-man-user-profile-avatar-icon-vector-library.jpg" alt="{{ user.get_username }}">
+                {% comment %} <img src="http://www.oogazone.com/wp-content/uploads/2018/11/best-hd-flat-business-man-user-profile-avatar-icon-vector-library.jpg" alt="{{ user.get_username }}"> {% endcomment %}
+                <img src="{{ user.profile_pic.url }}" alt="{{ user.get_username }}">
             </div>
 
               <div class="content">
@@ -23,7 +24,7 @@
                 <div class="info clearfix">
                   <div class="image">
                     <a href="#">
-                      <img src="http://www.oogazone.com/wp-content/uploads/2018/11/best-hd-flat-business-man-user-profile-avatar-icon-vector-library.jpg" alt="{{ user.get_username }}">
+                      <img src="{{ user.profile_pic.url }}" alt="{{ user.get_username }}">
                     </a>
                   </div>
                   <div class="content">

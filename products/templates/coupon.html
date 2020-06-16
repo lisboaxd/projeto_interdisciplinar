@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="overview-wrap">
-            <h2 class="title-1">Cupons</h2>
+            <h2 class="title-1">Meus Cupons</h2>
         </div>
     </div>
 </div>
@@ -17,36 +17,36 @@
     <div class="col-lg-12">
         <div class="table-responsive table--no-card m-b-30">
             {% if coupons %}
-            <!-- <table class="table table-borderless table-striped table-earning">
+            <table class="table table-borderless table-striped table-earning">
                 <thead>
                     <tr>
-                        <th>date</th>
-                        <th>order ID</th>
-                        <th>name</th>
-                        <th>actions</th>
+                        <th>Código</th>
+                        <th>Criado em</th>
+                        <th>Status</th>
+                        {% comment %} <th>actions</th> {% endcomment %}
                     </tr>
                 </thead>
-                <tbody>
-                    {% for product in products %}
-                    <tr>
-                        <td>{{ product.name }}</td>
-                        <td>{{ product.quantity }}</td>
-                        <td>{{ product.type_id }}</td>                        
-                        <td class="d-flex justify-content-between">
-                            <a href="#">
-                                <i class="zmdi zmdi-eye"></i> View
-                            </a>
-                            <a href="#">
-                                <i class="zmdi zmdi-edit"></i> Edit
-                            </a>
-                            <a href="{% url 'products:delete' product.pk %}">
-                                <i class="zmdi zmdi-delete"></i> Delete
-                            </a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table> -->
+            <tbody>
+            {% for coupon in coupons %}
+                <tr>
+                    <td>{{ coupon.hash }}</td>
+                    <td>{{ coupon.created_at|date:"d/m/Y" }}</td>
+                    <td>{% if coupon.is_used %}Usado {% else %} Não usado {% endif %}</td>                        
+                    {% comment %} <td class="d-flex justify-content-between">
+                        <a href="#">
+                            <i class="zmdi zmdi-eye"></i> View
+                        </a>
+                        <a href="#">
+                            <i class="zmdi zmdi-edit"></i> Edit
+                        </a>
+                        <a href="{% url 'products:delete' product.pk %}">
+                            <i class="zmdi zmdi-delete"></i> Delete
+                        </a>
+                    </td> {% endcomment %}
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
             {% else %}
             <div class="spacer-box-20"></div>
             <div class="empty-box">

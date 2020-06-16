@@ -28,8 +28,8 @@
                 <tbody>
                     {% for donor in donors %}
                     <tr>
-                        <td>{{ donor.user.user.get_username | title }}</td>
-                        <td>{{ donor.user.user.email }}</td>
+                        <td>{{ donor.user.get_username | title }}</td>
+                        <td>{{ donor.user.email }}</td>
                         <td>{{ donor.user.created_at | date:"d/m/Y" }}</td>                            
                     </tr>
                     {% endfor %}

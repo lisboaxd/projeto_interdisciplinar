@@ -3,8 +3,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView, ListView, FormView, CreateView, DeleteView, edit
 from django.urls import reverse, reverse_lazy
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.serializers import ModelSerializer
 
-from .models import Product, Company, Coupon, Donor
+from .models import Product, Company, Coupon, Donor, CompanyAssociate
 from .forms import ProductForm
 from core.models import UserProfileInfo
 
@@ -15,10 +17,10 @@ def list_product_view(request):
     products = ''
     donor = True
     try:
-        user = request.user.userprofileinfo.donor
+        user = request.user.donor
         products = Product.objects.filter(donor=user)
     except Exception as e:
-        user = request.user.userprofileinfo.company
+        user = request.user.company
         products = Product.objects.filter(company=user)
         donor = False
     
@@ -26,23 +28,31 @@ def list_product_view(request):
 
 @login_required
 def list_coupon_view(request):
-    coupons = Coupon.objects.all()
+    coupons = Coupon.objects.filter(donor=request.user)
     return render(request, 'coupon.html', {'coupons': coupons})
 
 
 @login_required
 def aprove_product(request, pk):
-    company = request.user.userprofileinfo.company
-    product = get_object_or_404(Product, pk=pk)
-    product.company = company
-    product.status = 'approved'
-    product.save()
-    products = Product.objects.filter(company=company)
-    return render(request, 'avaliate-product.html', {'products': products})
+    company = request.user.company
+    product = get_object_or_404(Product, pk=pk, status='waiting')
+    if product:
+        product.company = company
+        product.status = 'approved'
+        product.save()
+        products = Product.objects.filter(company=company)
+        coupon = Coupon(donor=product.donor.user)
+        coupon.save()
+        return render(request, 'avaliate-product.html', {
+            'products': products,
+            'coupon': coupon
+            })
+    else:
+        return redirect('/products/')
 
 @login_required
 def avaliate(request):
-    user = request.user.userprofileinfo.company
+    user = request.user.company
     products = Product.objects.filter(status='waiting')
     donor = False
     return render(request, 'list.html', {'products': products, 'donor': donor})
@@ -58,7 +68,7 @@ class CreateProductView(LoginRequiredMixin, CreateView):
         if form.is_valid():
             # TODO: validar se usuário é do tipo donor, se não for, retornar mensagem de erro
             prod = form.save(commit=False)
-            prod.donor = self.request.user.userprofileinfo.donor
+            prod.donor = self.request.user.donor
             prod.save()
             return self.form_valid(form)
 
@@ -87,4 +97,29 @@ def list_donors(request):
     return render(request, 'donors/list.html',{'donors':donors})
 
 
+class UserSerializer(ModelSerializer):
+    
+    class Meta:
+        model = UserProfileInfo
+        fields = ['first_name', 'id']
+        
+class DonorSerializer(ModelSerializer):
+    
+    class Meta:
+        model = Donor
+        fields = ['user', 'id']
 
+class CouponSerializer(ModelSerializer):
+    donor = UserSerializer(many=False, read_only=True)
+    class Meta:
+        model = Coupon
+        fields = '__all__'
+
+
+class CouponViewSet(ModelViewSet):
+    queryset = Coupon.objects.all()
+    serializer_class = CouponSerializer
+
+class DonorsViewSet(ModelViewSet):
+    queryset = Donor.objects.all()
+    serializer_class = DonorSerializer

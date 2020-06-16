@@ -6,56 +6,33 @@
 {% endblock title %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-12">
-        <div class="overview-wrap">
-            <h2 class="title-1">Avaliar Produtos</h2>
+{% if coupon %}
+    <div class="row">
+        <div class="alert au-alert-success alert-dismissible fade show au-alert au-alert--70per" role="alert" style="margin: 0 auto 20px auto !important;">
+            <i class="zmdi zmdi-check-circle"></i>
+            <span class="content">Produto aprovado e cupom gerado com sucesso!.</span>
         </div>
     </div>
-</div>
+{% endif %}
 <div class="row">
-    <div class="col-lg-12">
-        <div class="table-responsive table--no-card m-b-30">
-            {% if coupons %}
-            <!-- <table class="table table-borderless table-striped table-earning">
-                <thead>
-                    <tr>
-                        <th>date</th>
-                        <th>order ID</th>
-                        <th>name</th>
-                        <th>actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for product in products %}
-                    <tr>
-                        <td>{{ product.name }}</td>
-                        <td>{{ product.quantity }}</td>
-                        <td>{{ product.type_id }}</td>                        
-                        <td class="d-flex justify-content-between">
-                            <a href="#">
-                                <i class="zmdi zmdi-eye"></i> View
-                            </a>
-                            <a href="#">
-                                <i class="zmdi zmdi-edit"></i> Edit
-                            </a>
-                            <a href="{% url 'products:delete' product.pk %}">
-                                <i class="zmdi zmdi-delete"></i> Delete
-                            </a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table> -->
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title">Avaliar Produto</strong>
+            </div>
+            {% if coupon %}
+                <div class="card-body">
+                    <div class="typo-headers">
+                        <h3 class="pb-2 display-5">Doador: {{ coupon.donor }}</h3>
+                        <h3 class="pb-2 display-5">Código do cupom: {{ coupon.hash }}</h3>
+                    </div>
+                </div>
             {% else %}
-            <div class="spacer-box-20"></div>
-            <div class="empty-box">
                 <img src="{% static 'images/icon/green-earth.svg' %}" width="150px" alt="Recicla+ App" draggable="false" />
                 <h3>Não há registros</h3>
                 <p>Não encontramos nada para ser mostrado aqui.</p>
-            </div>  
             {% endif %}
         </div>
-    </div>                    
+    </div>
 </div>
 {% endblock content %}
