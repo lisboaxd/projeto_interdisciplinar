@@ -33,6 +33,10 @@ class Coupon(models.Model):
     donor = models.ForeignKey(UserProfileInfo, on_delete=models.CASCADE, related_name='doador')
     hash = models.UUIDField('hash', default=uuid.uuid4, editable=False, unique=True)
 
+    def __str__(self):
+        return f"{self.donor.first_name} | {self.hash}"
+
+
 class TypeProduct(models.Model):
     ACTIVE_CHOICES = (
         ('active', 'Ativo'),

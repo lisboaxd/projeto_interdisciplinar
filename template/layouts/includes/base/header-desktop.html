@@ -14,7 +14,9 @@
               <div class="image">
                 {% comment %} <img src="{% static 'images/icon/profile-avatar.svg' %}" alt="John Doe" /> {% endcomment %}
                 {% comment %} <img src="http://www.oogazone.com/wp-content/uploads/2018/11/best-hd-flat-business-man-user-profile-avatar-icon-vector-library.jpg" alt="{{ user.get_username }}"> {% endcomment %}
+                {% if user.profile_pic %}
                 <img src="{{ user.profile_pic.url }}" alt="{{ user.get_username }}">
+                {% endif %}
             </div>
 
               <div class="content">
@@ -24,7 +26,9 @@
                 <div class="info clearfix">
                   <div class="image">
                     <a href="#">
+                    {% if user.profile_pic. %}
                       <img src="{{ user.profile_pic.url }}" alt="{{ user.get_username }}">
+                    {% endif %}
                     </a>
                   </div>
                   <div class="content">
